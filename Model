@@ -1,0 +1,39 @@
+package com.bezkoder.spring.datajpa.model;
+import jakarta.persistence.*;
+@Entity
+@Table(name = "Model")
+public class Model {
+@rd
+@GeneratedValue(strategy GenerationType.AUTO) private long id;
+@Column(name = "food Delivery Service") private String foodDeliveryService;
+@Column(name = "description") private String description;
+@Column(name = "published") private boolean published;
+public Tutorial() {
+}
+public Tutorial (String foodDeliveryService, String description, boolean published){
+this.title = food Delivery Service;
+this.description description;
+this.published = published;
+}
+public long getId(){
+return id;
+}
+public String getFoodDeliveryService() {
+return title;
+}
+public class setFoodDeliveryService(String title){
+    this.foodDeliveryService = foodDeliveryService;
+}
+public String getDescription(){
+return description;
+}
+public void setDescription(String description){
+    this.description = description;
+}
+public boolean isPublished(){
+    return published;
+}
+public void setPublished(boolean isPublished){
+    this.published = published;
+}
+}

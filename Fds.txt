@@ -1,0 +1,45 @@
+package com.example.fooddelivery.controller;
+
+import com.example.fooddelivery.model.Order;
+import com.example.fooddelivery.model.Restaurant;
+import com.example.fooddelivery.service.FoodDeliveryService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/api/food")
+public class FoodDeliveryController {
+
+    @Autowired
+    private FoodDeliveryService foodDeliveryService;
+
+    @GetMapping("/restaurants")
+    public ResponseEntity<List<Restaurant>> getAllRestaurants() {
+        List<Restaurant> restaurants = foodDeliveryService.getAllRestaurants();
+        return ResponseEntity.ok(restaurants);
+    }
+    @PostMapping("/order")
+    public ResponseEntity<String> placeOrder(@RequestBody Order order) {
+        String orderId = foodDeliveryService.placeOrder(order);
+        return ResponseEntity.ok("Order placed successfully. Order ID: " + orderId);
+    }
+    @GetMapping("/order/{orderId}")
+    public ResponseEntity<String> getOrderStatus(@PathVariable String orderId) {
+        String status = foodDeliveryService.getOrderStatus(orderId);
+        return ResponseEntity.ok("Order Status: " + status);
+    }
+
+    @DeleteMapping("/order/{orderId}")
+    public ResponseEntity<String> cancelOrder(@PathVariable String orderId) {
+        boolean canceled = foodDeliveryService.cancelOrder(orderId);
+        if (canceled) {
+            return ResponseEntity.ok("Order canceled successfully.");
+        } else {
+            return ResponseEntity.badRequest().body("Unable to cancel order.");
+        }
+    }
+
+}
